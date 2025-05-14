@@ -14,9 +14,27 @@ image saved :
 Open-Source Intelligence (OSINT) is a methodology employed by the intelligence community to find, analyze, and decide how to handle data accessible from publicly-available sources.
 
 
+To protect confidential, important, or classified data, CPT members must adhere to the following precautions:
+• Properly dispose of sensitive information (Operation Plans [OPLAN], memorandums, classified documents, etc.).
+• Do not share sensitive information to unauthorized personnel.
+• Avoid discussing sensitive information in public or unauthorized areas.
+• Do not send, post, and/or list information over the web.
+• Do not leave computers, tablets, and/or mobile phones unattended in public areas.
 
-
-
+Below are a number of terms and definitions commonly used when discussing OPSEC. While this list is not all-inclusive, it is important to have a common lexicon for discussing OPSEC concerns and considerations.
+• Adversary: An enemy who has the potential and motive to harm Department of Defense (DoD) activities or operations; also referred to as a threat.
+• Countermeasure: Employing equipment and/or tactics with the aim of reducing the operational effectiveness of an adversary's activities. Anything that effectively negates or mitigates an adversary's ability to exploit vulnerabilities qualifies as a countermeasure.
+• Critical information: Specific information about friendly intentions, skills, or activities that adversaries need in order to prepare and function effectively in order to ensure failure or undesirable consequences for friendly mission accomplishment.
+• Indicator: Anything that draws attention to crucial details or provides an opponent with information regarding the environment or situation.
+• OPSEC: An empirical method that identifies preparation, processes, or operations to deny an adversary knowledge about objectives and capabilities that is usually unclassified. Other security disciplines are not replaced by OPSEC; rather, they are supplemented by it.
+• Risk: A calculation of the insecurity of confidential information being compromised as a result of an adversary's exploitation.
+TRAINEE GUIDE A-531-4426
+CUI
+1508
+CUI
+• Risk analysis: Specific vulnerabilities related to perceived or real-world security threat scenarios to evaluate the probability of sensitive information becoming compromised.
+• Risk assessment: A method of assessing the insecurity of information based on vulnerability to intelligence gathering and the severity of loss anticipated.
+• Vulnerability: An opportunity for an adversary to obtain sensitive information by exploiting a flaw. Anything that might give an adversary access to sensitive information.
 
 
 

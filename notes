@@ -36,8 +36,136 @@ CUI
 • Risk assessment: A method of assessing the insecurity of information based on vulnerability to intelligence gathering and the severity of loss anticipated.
 • Vulnerability: An opportunity for an adversary to obtain sensitive information by exploiting a flaw. Anything that might give an adversary access to sensitive information.
 
+########## mod 13 lesson 1 ###############
+######### The Traditional SIEM ##########
+
+A SIEM has a range of capabilities that, when combined and integrated, offer security monitoring and correlation of multiple data sources. The software allows security teams to gain insights on the attacker with threat rules derived from attacker Tactics, Techniques, and Procedures (TTP) and known Indicators of Compromise (IOC). The common capabilities and applications of a SIEM include:
+Data AggregationSIEMs aggregate and consolidate data from across the enterprise’s network devices and endpoints. Each node on the network continually processes large amounts of data. A SIEM is able to aggregate the data being processed.
+Data NormalizationAggregated data often has disparities and different fields. Data normalization is the process of structuring data commonly found in a relational database or SIEM. The data is structured in accordance with a series of normal forms. The normal forms are filters designed to reduce data redundancy and improve data integrity. The filters process the data by organizing it to avoid:Data Redundancy: Unintentional occurrence of the same piece of data being held in two separate placesInsertion Anomaly: Inability to add data to the database or SIEM due to absence of other dataUpdate Anomaly: Data inconsistency that results from data redundancyDeletion Anomaly: Unintended loss of data due to deletion of other data
+
+Centralized DashboardSIEMs aggregate and consolidate data from across the enterprise’s network devices and endpoints into one centralized dashboard. The dashboard is updated in realtime and allows an analyst to see a live snapshot of the enterprise. A sample dashboard is provided in Figure 13.1-2:
+
+Analysis and Security Event CorrelationSIEM enables analysts to access data and make decisions regarding potential signs of a data breach, threat, attack, or vulnerability.
+
+A SIEM has a range of capabilities that, when combined and integrated, offer security monitoring and correlation of multiple data sources. The software allows security teams to gain insights on the attacker with threat rules derived from attacker Tactics, Techniques, and Procedures (TTP) and known Indicators of Compromise (IOC). The common capabilities and applications of a SIEM include:
+Data AggregationSIEMs aggregate and consolidate data from across the enterprise’s network devices and endpoints. Each node on the network continually processes large amounts of data. A SIEM is able to aggregate the data being processed.
+Data NormalizationAggregated data often has disparities and different fields. Data normalization is the process of structuring data commonly found in a relational database or SIEM. The data is structured in accordance with a series of normal forms. The normal forms are filters designed to reduce data redundancy and improve data integrity. The filters process the data by organizing it to avoid:Data Redundancy: Unintentional occurrence of the same piece of data being held in two separate placesInsertion Anomaly: Inability to add data to the database or SIEM due to absence of other dataUpdate Anomaly: Data inconsistency that results from data redundancyDeletion Anomaly: Unintended loss of data due to deletion of other data
+
+Centralized DashboardSIEMs aggregate and consolidate data from across the enterprise’s network devices and endpoints into one centralized dashboard. The dashboard is updated in realtime and allows an analyst to see a live snapshot of the enterprise. A sample dashboard is provided in Figure 13.1-2:
 
 
+Analysis and Security Event CorrelationSIEM enables analysts to access data and make decisions regarding potential signs of a data breach, threat, attack, or vulnerability.
+
+Data Source Types and Manual Ingestion
+Host-Based Security Systems (HBSS)
+• What is it?
+○ HBSS is a suite of Commercial-Off-The-Shelf (COTS) applications created by McAfee. HBSS provides anti-virus detection rules. If a detection rule is triggered the user is alerted of the potentially harmful activity.
+• How does it pertain to an investigation?
+○ HBSS notifications of detection rule positive hits allow for starting points in IR. When the anti-virus is triggered users are able to gather the information — what behavior triggered the notification, which node or network layer is affected, etc. — and start the investigation.
+• Data Source and MITRE Adversarial Tactics, Techniques, and Common Knowledge (ATT&CK)
+○ Adversaries may attempt to get a listing of services running on remote hosts, including those that may be vulnerable to remote software exploitation. Methods to acquire this information include port and vulnerability scans using tools that are brought onto a system.
+Windows Events
+• What is it?
+○ Windows Operating Systems (OS) provide system process tracking through Windows event logs; viewable in Windows Event Viewer and exportable through .evtx files. Windows event logs track unique occurrences on Windows OSs in the network. These occurrences include:
+■ Successful/failed logons
+■ Account creation
+■ Running a program
+
+How does it pertain to an investigation?
+○ Windows event logs enable analysts to track events that occur on a Windows OS. Analysts are able to view and connect occurrences of events and the time and date stamp associated with them.
+• Data Source and MITRE ATT&CK
+○ Adversaries may disable Windows event logging to limit data that can be leveraged for detections and audits. The data is used by security tools and analysts to generate detections.
+○ Adversaries may target system-wide logging or just that of a particular application. By disabling Windows event logging, adversaries can operate while leaving less evidence of a compromise behind; this creates an anomaly and is potentially detectable.
+System Monitor (Sysmon)
+• What is it?
+○ Windows Sysmon is a service installed on Windows OSs. Sysmon monitors and logs activity to the Windows event log. It provides detailed information about a wide variety of processes and connections including:
+■ Process creations
+■ Network connections
+■ Changes to file creation time
+• How does it pertain to an investigation?
+○ Similarly to Windows events, Sysmon enables analysts to track specific events that occur on a Windows OS. Analyst are able to view and connect occurrences of events and the time and date stamp associated with them.
+• Data Source and MITRE ATT&CK
+○ Adversaries may disable Sysmon logging to limit data that can be leveraged for detections and audits. The data is used by security tools and analysts to generate detections.
+○ Adversaries may target system-wide logging or just that of a particular application. By disabling Sysmon event logging, adversaries can operate while leaving less evidence of a compromise behind.
+Web Proxy
+• What is it?
+○ A web proxy is a tool that facilitates a user’s connection from their machine to a distant endpoint, normally external to their network and often specific to a particular service(s). The proxy server interrupts the connection between the client system and the end server. It acts as a go-between for the two endpoints. Web proxies log all traffic via web proxy log files. These files include:
+■ Session duration
+■ Hypertext Transfer Protocol (HTTP) status, method, and version
+■ Bytes in/out
+TRAINEE GUIDE A-531-4426
+CUI
+1535
+CUI
+■ Uniform Resource Locator (URL) category, hostname, and path
+■ Filename
+■ User agent
+• How does it pertain to an investigation?
+○ Web proxy log files enable analysts to review connections made with external websites. They can help determine what external system was reached and if data was transferred, and if so, how much was transferred.
+• Data Source and MITRE ATT&CK
+○ Adversaries may use a web proxy to act as an intermediary for network communications to a Command and Control (C2) server to avoid direct connections to their infrastructure. Many tools exist that enable traffic redirection through proxies or port redirection. Adversaries use these types of proxies to manage C2 communications, to provide resiliency in the face of connection loss, or to ride over existing trusted communications paths to avoid suspicion.
+Web Server
+• What is it?
+○ A web server is an external-facing server on a domain. Web servers are responsible for hosting software supporting a website. The web server log files log traffic coming to the website the server is hosting on. Every time a browser or user agent — Google included — requests any resource (pages, images, javascript file, etc.) from the web server, the activity is logged.
+• How does it pertain to an investigation?
+○ Web server log files enable analysts to view who has accessed their external-facing website. Web server log files also enable analysts to see what might have been taken from the website.
+• Data Source and MITRE ATT&CK
+○ Adversaries may backdoor web servers with web shells to establish persistent access to systems. A web shell is a web script placed on a breached web server to allow an adversary to use the web server as a gateway into a network. A web shell provides a set of functions to execute or a Command Line Interface (CLI) on the system that hosts the web server.
+Assured Compliance Assessment Solution (ACAS) — Extensible Markup Language (XML) Ingestion
+• What is it?
+○ ACAS is an enterprise vulnerability scanning capability for networks and components that are owned or operated by the Department of Defense (DoD).
+• How does it pertain to an investigation?
+○ ACAS scans are used to locate potentially compromised systems based on the vulnerabilities that may be present in the network.
+• Data Source and MITRE ATT&CK
+○ Adversaries may attempt to get a listing of services running on remote hosts, including those that may be vulnerable to remote software exploitation. Methods to acquire this information include port and vulnerability scans using tools that are brought onto a system.
+TRAINEE GUIDE A-531-4426
+CUI
+1536
+CUI
+Electronic Mail (Email)
+• What is it?
+○ Email traffic that occurs through the email server on the network is logged through email log files. Email log files include information such as:
+■ Mail event (was the email delivered or received)
+■ Email addresses
+■ Remote host
+■ Size of the message
+• How does it pertain to an investigation?
+○ Email log files enable analysts to see email communication across the network.
+• Data Source and MITRE ATT&CK
+○ Adversaries may target user email to collect sensitive information. Emails may contain sensitive data, including trade secrets or Personally Identifiable Information (PII) that can prove valuable to adversaries. Adversaries can collect or forward email from mail servers or clients.
+○ Adversaries may also use access to a compromised server to further their phishing campaigns for additional internal exploitation or exploitation of partner organizations.
+Firewall
+• What is it?
+○ A network firewall is the gateway into and out of the network, or portions of the network. The firewall evaluates traffic crossing it, destined for it, or coming from it against a set of defined criteria (rules). It determines what should happen with the traffic based on the definition of those rules. Firewall log files include information such as:
+■ Source Internet Protocol (IP) address
+■ Source port
+■ Destination IP address
+■ Destination port
+○ A host-based firewall is typically located on a specific host on the network. A firewall protects the host from untrusted devices located on the same network. Once configured, the firewall also protects the host from devices attempting to potentially attack the host via open ports and services.
+• How does it pertain to an investigation?
+○ Firewall log files enable analysts to view traffic that has attempted to or has successfully made it into and out of the network.
+• Data Source and MITRE ATT&CK
+○ Adversaries may disable or modify system firewalls in order to bypass controls limiting network usage. Changes include disabling the entire mechanism as well as adding, deleting, or modifying particular rules. This can be done numerous ways depending on the OS, including via CLI, editing Windows registry keys, and Windows control panel.
+○ Adversaries might try to enumerate the rules of a firewall to determine what they can use to get through the firewall, and what capabilities they need to employ for C2 or data exfiltration once in.
+TRAINEE GUIDE A-531-4426
+CUI
+1537
+CUI
+Domain Name System (DNS)
+• What is it?
+○ DNS is frequently referred to as the phonebook of the internet. When a request to access a domain is made, for example a user attempting to access ESPN.com, DNS takes that request and follows a set hierarchy to find the authoritative domain, and requests — normally — the IP address associated with the Fully Qualified Domain Name (FQDN). Requests made via DNS are logged in DNS log files.
+• How does it pertain to an investigation?
+○ DNS log files enable analysts to view requests made by users to domains. Analysts are able to view websites visited by users on their domain. They are able to link the domains in the logs to known or suspicious domains.
+• Data Source and MITRE ATT&CK
+○ Adversaries may dynamically establish connections to C2 infrastructure to evade common detections and remediations. DNS logs contain information that helps to identify such activity.
+Packet Capture (PCAP)
+• What is it?
+○ PCAP is an Application Programming Interface (API). The API captures live packet data from the network and stores it in PCAP files. PCAP files capture packets traveling through multiple network layers. PCAP files contain information such as network packets sent using Transmission Control Protocol (TCP)/IP and User Datagram Protocol (UDP).
+• How does it pertain to an investigation?
+○ PCAP files enable analysts to conduct packet analysis. Packet analysis allows analysts to monitor bandwidth usage, identify Dynamic Host Configuration Protocol (DHCP) servers, and DNS resolution.
+• Data Source and MITRE ATT&CK
+○ Adversaries may sniff to collect the network traffic to capture information about an environment, including authentication material passed over the network and is included in PCAP files. Network sniffing refers to using the network interface on a system to monitor or capture information sent over a wired or wireless connection. An adversary may place a network interface into promiscuous mode to passively access data in transit over the network, or use Switched Port Analyzer (SPAN) ports to capture a larger amount of data.
+○ Network sniffing may also reveal configuration details, such as running services, version numbers, and other network characteristics (e.g., IP addresses, hostnames, Virtual Local Area Network Identifiers [VLAN ID]) necessary for subsequent lateral movement and/or defense evasion activities.
 
 
 

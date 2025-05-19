@@ -78,19 +78,133 @@ The following banner appears to indicate the logs are being uploaded and disappe
 ########## mod 13 lesson 2 ###############
 ######### Elastic Stack Overview ##########
 
+_id is important for pcaps 00
 
 
 
 
+6. Using the schema syntax attribute: search criteria in Kibana, run the following query for Windows event Identifier (ID) 4624 — a successful account log on — by entering the following in the Search:
+
+
+event.code: 4624
 
 
 
 
+1. Access the Security Onion - Home dashboard, select Security Onion - Home from the Menu Button. 
+ At the top of the page, select Edit to modify the dashboard.
+ Select Add to add a visualization to the dashboard.
+. Select Create new > Visualization > Data Table.
+ Select *:so-* (Security Onion) as the source.
+. Set the Time/Date filter to May 1, 2020 @ 09:00:00.000 → May 1, 2021 @ 09:00:00.00.
+
+
+7. Under Buckets, select Add.
+ Select Split rows.
+
+
+9. Update the fields with the following values:
+
+
+a. Aggregation: Terms
+b. Field: source.ip
+c. Order by: Metric: Count
+d. Order: Descending
+e. Size: 10
+f. Custom Label: Top 10 Source IP Connections
+
+
+NOTE: Internet Protocol (IP)
+
+10. Select Update. A table is created and displayed.
+NOTE: In this example, the Time/Date filter is set to May 1, 2020 to May 1, 2021. The table looks different if the time or date are set differently. If the Time/Date filter is different, change it to May 1, 2020 @ 09:00:00.000 → May 1, 2021 @ 09:00:00.000.
+
+
+11. Select Save.
+
+
+12. Title the visualization Top 10 Source IP Connections. Select Save and return to return to the Security Onion - Home dashboard (in Edit mode).
+
+
+The newly created table appears at the bottom of the dashboard. Kibana allows users to drag and drop the table to any location on the dashboard.
+
+
+13. Once the table is in the desired location on the dashboard, select Save. 
+
+
+ Access the Security Onion - Home dashboard, select Security Onion - Home from the Menu Button. 
+2. At the top of the page, select Edit to modify the dashboard.
+3. Select Add to add a visualization to the dashboard.
+4. Select Create new > Visualization > Pie.
+Select *:so-* as the source.
+6. Under Buckets, select Add.
+
+
+7. Under Add Buckets, select Split slices.
+
+
+8. Update the fields with the following values:
+
+
+a. Aggregation: Terms
+b. Field: event.code.keyword
+c. Order by: Metric: Count
+d. Order: Descending
+e. Size: 10 
+
+
+9. Select Update.
+
+NOTE: The visualization may look different when compared to the screenshot from Step 9. The data included in the visualization reflects what is currently occurring on the network. 
+
+
+For the example above, the largest value in this pie chart is a NULL value. To make the chart more useful, the null value should be removed. To remove the null value:
+
+
+9a. Select the top red dot (the color that represents the NULL value) then the minus sign: 
+
+9b. Once the minus sign is selected the NOT filter is applied, and the NULL value is removed from the chart: 
 
 
 
+10. At the top of the page, select Save.
 
 
+11. Title the pie chart Top 10 Event IDs, and select Save and return.
+
+
+12. Kibana returns to the Security Onion - Home dashboard. Scroll down the page to view the recently developed pie chart: 
+
+NOTE: The dashboard must be saved in order to keep the chart on the dashboard permanently.
+
+
+13. At the top of the Security Onion - Home dashboard, select Save. If prompted, maintain the title Security Onion - Home and select Save.
+
+Build a data table that aggregates on domains found in DNS requests on the CDA Corp network.  
+
+
+1. Create a new data table within the Visualization page in Kibana.
+
+
+2. Set the time picker to the correct timeframe.
+
+
+3. Run the following query to limit the search to all DNS records. 
+
+
+event.dataset:dns
+
+
+
+This query searches for all the Zeek DNS logs over the defined timeframe. The event.dataset field contains values that indicate the protocol detected by Zeek in each network event. By searching for dns, all search results are limited to DNS events only.
+
+
+5. Use a Count aggregation with a Terms bucket, splitting on the field dns.highest_registered_domain.keyword.
+
+Run the following query on the Discover tab to limit your search to all DNS events that queried the suspicious domain:
+
+
+dns.query.name:*faceb00k.com
 
 
 

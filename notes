@@ -184,6 +184,63 @@ A SIEM is central to the modern Information Technology (IT) infrastructure. It i
 
 The Windows event ID associated with a DCSync attack is ID 4662. Event ID 4662, in the subcategory Audit Directory Service Access, audits basic information about users performing operations within AD for events specified in an object’s System Access-Control List (SACL). Using ID 4662, it is possible to see when a user exercises replicating directory changes, the goal of a successful DCSync attack. Correlating ID 4662 with other IDs, such as a successful logon (4624) or an attempt to access an object (4663), helps identify where and when a successful DCSync attack may have occurred. 
 
+########## mod 13 lesson 3 ###############
+######### Splunk Overview ##########
+
+Forwarder
+
+
+A forwarder is responsible for collecting data from a source, and forwarding (i.e., sending) that data to another forwarder or to an indexer. There are two types of forwarders: universal forwarders and heavy forwarders.
+
+
+A universal forwarder is a lightweight forwarder that only performs basic forwarding functionality. It is not capable of acting as a full instance of Splunk; it simply collects raw data from a source and sends that raw data to a destination.
+
+
+A heavy forwarder provides additional functionality that a universal forwarder is not capable of. These additional capabilities include pre-processing data, or routing that data to different destinations based on defined conditions. Because a heavy forwarder can perform this extra processing, it commonly forwards data directly to indexers rather than to other forwarders. A heavy forwarder can act as a full instance of Splunk. The additional components of a Splunk instance are discussed in more detail under the Splunk Instances section.
+
+
+Indexer
+
+
+An indexer handles data processing and storage via the indexing process. In the indexing process, raw data is parsed and transformed into events. These events are then stored in an index located on the indexer. Multiple indexes can exist on a single indexer.
+
+
+In advanced Splunk deployments, multiple indexers may exist. Usually, these indexers handle data coming from different sources. Advanced deployments may choose to set up multiple indexers to act as a cluster. Clustered indexers receive and replicate the same data across each indexer in the cluster. This can increase performance of the Splunk deployment, and act as protection against data loss.
+
+
+Search Head
+
+
+A search head is responsible for parsing search queries into search jobs and distributing those search jobs to indexers. Indexers process a search job against the indexes stored within that indexer, and return the results of the search job back to the search head. The search head performs any necessary post-processing of the results before making the results available to the interface that queried the search head. Interfaces are discussed briefly in the Splunk Instances section.
+
+
+Splunk Instances
+
+
+Each component detailed in Figure 13.3-1, with the exception of the universal forwarder, is part of an instance of Splunk. A Splunk instance can be configured to act as one or more of the above components. For example, a single Splunk Enterprise instance running on a machine can act as:
+A heavy forwarder: Collecting and pre-processing raw data from the local machine or a remote sourceAn indexer: Parsing raw data into events and storing those events in indexesA search head: Tasking search jobs to the local indexer
+
+Splunk instances can be configured to act very differently from each other, allowing them to take on niche roles when required. These roles include:
+Cluster managers: Manage clusters of indexesDeployment servers: Act as centralized configuration managers for other Splunk instancesLicense masters: Manage Splunk licenses for multiple other Splunk instances
+
+
+########## mod 13 lesson 4 ###############
+######### Detection Engineering ##########
+
+
+Detection Engineering is the process of developing new processes and algorithms to identify and alert on any behavior that the defenders have identified as anomalous, often MCA. A detection rule — also referred to as a signature, analytic, or detector — is comprised of three main parts: a subject, a method, and enrichment attributes. The subject is what the engineer is trying to detect. For instance, if an engineer is searching for a piece of malware, the malware is the subject. The method is how to identify the subject. For instance, querying Zeek logs to examine Domain Name System (DNS) traffic may be a method for detecting network traffic anomalies.  Enrichment attributes help provide additional context or notes for the detection. Enrichment attributes may define how the rule maps to MITRE ATT&CK.  When the criteria for a defined rule is met, a detection alert is pushed to the user. Each rule has a specific Identifier (ID) associated with it. 
+
+
+
+
+Sigma is an open-source platform that allows defined rules to be used and shared across various organizations. Sigma is similar to that of a travel metasearch engine website, such as Trivago or Kayak. Instead of searching for flights by each carrier, the metasearch engine website consolidates and brings all the options to one centralized location. Sigma is a metasearch engine for detection engineering. Sigma accesses a repository of rules; each rule has the proper format and definition for the application that utilizes the rule. The centralized location assists users by not requiring them to visit each application’s specific rule repository and format. 
+
+
+Benefits of Sigma:
+Supports several SIEMs (such as Elastic and Splunk
+)Built to handle log files (such as Snort, YARA, and Zeek)
+Enables analytics to re-use and share across the organizations
+Schema is easily understood
 
 
 
@@ -199,6 +256,93 @@ The Windows event ID associated with a DCSync attack is ID 4662. Event ID 4662, 
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Analytics at Scale Student Worksheet
+
+APT has been targeting the Veterans Bureau in South Africa extensively for the last 90 days. APT is known to use open source tools and modify them to bypass signature based detections. Specifically APT has been seen to:
+
+Modify the TCP window size when using the NMAP scanning tool
+Use Virtual Private Servers leased in the United States to try and obfuscate their physical location
+Your tasking is to assess the extent of scanning activity.
+
+Key Cyber Terrain:
+41.112.72.0/24 - AAS DMZ (South Africa)
+172.16.0.0/16 - AAS Internal Network
+172.16.2.0/24 - AAS Servers
+172.16.3.0/24 - AAS Users
+172.16.4.0/24 - AAS Security
+aas-win-hunt credentials:
+Username: trainee
+Password: Th1s is 0perational Cyber Training!
+ 
+aas-kali-hunt credentials:
+Username: trainee
+Password: Th1s is 0perational Cyber Training!
+ 
+Security Onion web interface
+IP address: 172.16.4.3
+Username: onion@aas.com
+Password: Th1s is 0perational Cyber Training!
+ 
+Security Onion SSH
+IP address: 172.16.4.3
+Username: trainee
+Password: Th1s is 0perational Cyber Training!
+
+1) Use the following information to answer the question.
+Hostname: aas-dc
+IP: 172.16.2.2
+Username: trainee
+Password: Th1s is 0perational Cyber Training!
+Enter the port number that aas-dc is forwarding winlogbeat logs to?
+5044
+
+2) Use the following information to answer the question.
+Hostname: aas-dc
+IP: 172.16.2.2
+Username: trainee
+Password: Th1s is 0perational Cyber Training!
+What is the 2nd log that is being forwarded? 
+Microsoft-Windows-PowerShell/Operational
+
+3) Use the following information to answer the question.
+APT is an emerging threat actor that showed up on the Department of Defenses radar not long ago. Their attacks typically target publicly facing servers and conduct reconnaissance with tools such as NMAP. AAS, a mission partner organization, is concerned since their entire DMZ is publicly addressed and accessible. Their DMZ subnet is at the 41.112.72.0/24.
+
+Utilizing Kibana and the timeframe Aug 23, 2021 @ 09:00:00.000 -> now, identify the host in the DMZ that was the destination for the third most connections. Enter the answer in the format X.X.X.X.
+		41.112.72.34
+4) Utilizing Kibana and the timeframe Aug 23, 2021 @ 09:00:00.000 -> now, enter the destination TCP port number with the 4th largest number of events in the DMZ.
+25
+5) An intelligence report suggests that APT uses a custom version of NMAP that uses a different TCP window size to evade detection from NIDS. NMAP is installed by default on the Kali Linux host. What is the default TCP window size used during a NMAP TCP connect scan?
+			1024
+
+6) A further intelligence report states that APT may have targeted the mission partner’s network. However, the NIDS was not triggered. Investigate the attack in Kibana by setting the time range to Aug 23, 2021 19:00:00 - Aug 23, 20:00:00. 
+What is the IP address of the malicious actor?
+		104.53.222.209
+
+7) Another intelligence report states that APT may use a custom version of NMAP that has a different TCP window size. What is the TCP window sized used by the custom version of NMAP?
+			3000
+
+8) Enter the alert rule name that is displayed when an NMAP SYN Stealth scan is run with no options against the AAS DMZ.
+			ET SCAN NMAP -sS window 1024
+
+9) The mission partner wants to be able to detect future occurrences of APT HOT PANINI’s custom NMAP tool. How should the Suricata rule be changed to catch the custom version of NMAP? Enter the field that needs to be changed and the value.
+
+		Window:3000
 
 
 

@@ -172,11 +172,17 @@ Packet Capture (PCAP)
 ######### Elastic Stack Overview ##########
 
 
+SIEM
 
 
+A SIEM is central to the modern Information Technology (IT) infrastructure. It is a software solution that aggregates and analyzes activity from many different resources. A SIEM processes data coming into and departing from networks and systems that are under an organization’s control. Some SIEMs come with extensive functionality for data indexing, presentation, and alerts. However, the data ingested into a SIEM is only as useful as the accuracy of the data indices and filtering capabilities. The success of a SIEM is directly related to the administrator’s expertise with the accuracy of the data.
 
 
+4624 is a successfull login 
+4625 filed login
 
+
+The Windows event ID associated with a DCSync attack is ID 4662. Event ID 4662, in the subcategory Audit Directory Service Access, audits basic information about users performing operations within AD for events specified in an object’s System Access-Control List (SACL). Using ID 4662, it is possible to see when a user exercises replicating directory changes, the goal of a successful DCSync attack. Correlating ID 4662 with other IDs, such as a successful logon (4624) or an attempt to access an object (4663), helps identify where and when a successful DCSync attack may have occurred. 
 
 
 

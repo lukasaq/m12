@@ -168,7 +168,8 @@ Packet Capture (PCAP)
 ○ Network sniffing may also reveal configuration details, such as running services, version numbers, and other network characteristics (e.g., IP addresses, hostnames, Virtual Local Area Network Identifiers [VLAN ID]) necessary for subsequent lateral movement and/or defense evasion activities.
 
 
-
+########## mod 13 lesson 2 ###############
+######### Elastic Stack Overview ##########
 
 
 

@@ -3,6 +3,34 @@
 
 
 
+########## mod 13 lesson 1 ###############
+######### OSINT Techniques ##########
+
+
+10. Select This PC > Local Disk (C:).
+
+11. Navigate to View > Show/hide. Check Hidden Items:
+
+Navigate to ProgramData > Elastic > Beats > winlogbeat.
+
+in file : winlogbeat.event_logs:, output.logstash:
+
+
+In Terminal, run the following command:
+
+
+services.msc
+
+In Services, navigate to Elastic Winlogbeat-Oss 7.9.3. Right-click the service and select Properties.
+
+
+NOTE: Elastic Winlogbeat service is not native to the Windows OSs. The software requires installation and configuration. 
+
+
+21. In the Elastic Winlogbeat-Oss 7.9.3 Properties window, navigate to the Startup type drop-down menu, select Automatic > Apply.
+
+
+22. Under Service Status, select Start > Ok.
 
 
 
@@ -10,19 +38,45 @@
 
 
 
+2. From the Windows Start menu, enter event viewer. Open Event Viewer.
+. Select Windows Logs > Security.
+NOTE: Viewing and analyzing event logs in Windows Event Viewer is difficult. Uploading event logs to the Elastic Stack and viewing with Kibana enables easier analysis. 
+
+
+4. Right-click Security and select Filter Current Log… to define a filter for the Security log.
+
+
+5. Check Audit Failure from the dropdown for Keywords and select OK.
+
+
+. Right-click on the Security log and select Save Filtered Log File As… Name the file CDA-SECURITY and save it to the Host-Upload folder on the desktop.
+
+ Verify the file type is a .evtx file.
+Upon selecting Save, the following dialog box may appear:
+ Select No display information > OK.
+
+
+On the cda-hr-2 VM, open Windows PowerShell and navigate to the following path:
+
+
+C:\ProgramData\Elastic\Beats>
 
 
 
+2. To initiate the manual upload of the event logs, run the following script:
+
+
+C:\ProgramData\Elastic\Beats> .\UploadScript.ps1
 
 
 
+3. Enter the following information at each prompt:
+Enter target directory path containing EVTX logs or folders grouping them by system (i.e., C:\Users\zburnham\EVTX-Logs): C:\Users\Trainee\Desktop\Host-UploadDo you have nested folders labeled by system within this directory? (Default is NO) (y/n): nEnter Client Name: hr-2Enter Case # (i.e., Resolvn): 8888Enter a searchable identifier or note for this evidence upload (i.e., coda-hr-2) Identifier: CDA
+The following banner appears to indicate the logs are being uploaded and disappears when the logs have been successfully uploaded to Elastic Stack:
 
 
-
-
-
-
-
+########## mod 13 lesson 2 ###############
+######### Elastic Stack Overview ##########
 
 
 
